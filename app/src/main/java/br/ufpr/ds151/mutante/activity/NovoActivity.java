@@ -22,9 +22,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -50,17 +53,22 @@ public class NovoActivity extends AppCompatActivity {
 
     String base64;
     Bitmap bitmap;
-    UsuarioDTO usuarioDTO;
+    UsuarioDTO usuarioDTO, usuarioDono;
     MutanteDTO mutanteDTO;
     String operacao;
 
     EditText editTextNome, editTextHabilidade1, editTextHabilidade2, editTextHabilidade3;
     ImageView imageView;
+    TextView textViewUsuario;
     Button buttonSalvar, buttonCamera, buttonGaleria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Desabilita title bar
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_novo);
 
         Bundle params = getIntent().getExtras();
@@ -79,6 +87,7 @@ public class NovoActivity extends AppCompatActivity {
         buttonSalvar        = findViewById(R.id.buttonSalvar);
         buttonCamera        = findViewById(R.id.buttonCamera);
         buttonGaleria       = findViewById(R.id.buttonGaleria);
+        textViewUsuario     = findViewById(R.id.textViewUsuario);
 
         if (!operacao.equals("new")) {
             editTextNome.setText(mutanteDTO.getNome());
@@ -94,6 +103,8 @@ public class NovoActivity extends AppCompatActivity {
             bitmap = ImageConverter.base64ToBitmap(base64);
             imageView.setImageBitmap(bitmap);
 
+            recuperaUsuarioDono(mutanteDTO.getIdUsuario());
+            
             editTextNome.setEnabled(false);
             editTextHabilidade1.setEnabled(false);
             editTextHabilidade2.setEnabled(false);
@@ -103,6 +114,27 @@ public class NovoActivity extends AppCompatActivity {
             buttonGaleria.setEnabled(false);
 
         }
+    }
+
+    private void recuperaUsuarioDono(Long idUsuario) {
+
+        Call<UsuarioDTO> call1 = new RetrofitConfig().getMutanteService().getUsuario(idUsuario);
+
+        call1.enqueue(new Callback<UsuarioDTO>() {
+            @Override
+            public void onResponse(Call<UsuarioDTO> call, Response<UsuarioDTO> response) {
+                if (response.isSuccessful()) {
+                    usuarioDono = response.body();
+                    textViewUsuario.setText("Usuário:"+ usuarioDono.getNome());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UsuarioDTO> call, Throwable t) {
+                Toast.makeText(NovoActivity.this, "Erro ao recuperar Usuário", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
@@ -235,16 +267,19 @@ public class NovoActivity extends AppCompatActivity {
         if (!editTextHabilidade1.getText().toString().isEmpty()) {
             HabilidadeDTO habilidadeDTO = new HabilidadeDTO();
             habilidadeDTO.setDescricao(editTextHabilidade1.getText().toString());
+            habilidadeDTO.setIdMutante(mutanteDTO.getId());
             lh.add(habilidadeDTO);
         }
         if (!editTextHabilidade2.getText().toString().isEmpty()) {
             HabilidadeDTO habilidadeDTO = new HabilidadeDTO();
             habilidadeDTO.setDescricao(editTextHabilidade2.getText().toString());
+            habilidadeDTO.setIdMutante(mutanteDTO.getId());
             lh.add(habilidadeDTO);
         }
         if (!editTextHabilidade3.getText().toString().isEmpty()) {
             HabilidadeDTO habilidadeDTO = new HabilidadeDTO();
             habilidadeDTO.setDescricao(editTextHabilidade3.getText().toString());
+            habilidadeDTO.setIdMutante(mutanteDTO.getId());
             lh.add(habilidadeDTO);
         }
 
@@ -252,7 +287,7 @@ public class NovoActivity extends AppCompatActivity {
         mutanteDTO.setHabilidades(lh);
         mutanteDTO.setFoto(base64);
 
-        Call<MutanteDTO> call1 = new RetrofitConfig().getMutanteService().postMutante(mutanteDTO);
+        Call<MutanteDTO> call1 = new RetrofitConfig().getMutanteService().putMutante(mutanteDTO.getId(), mutanteDTO);
 
         call1.enqueue(new Callback<MutanteDTO>() {
             @Override

@@ -43,4 +43,8 @@ public interface MutanteService {
 
     @DELETE("mutantes/{id}")
     Call<MutanteDTO> deleteMutante(@Path("id") Long id);
+
+    @GET("usuarios/{id}")
+    Call<UsuarioDTO> getUsuario(@Path("id") Long id);
+
 }

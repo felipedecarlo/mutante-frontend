@@ -4,12 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/TADS/DS151/AndroidStudioProjects/Mutante/app/src/main/res/layout/activity_listar.xml" value="0.159375" />
-        <entry key="..\:/TADS/DS151/AndroidStudioProjects/Mutante/app/src/main/res/layout/activity_login.xml" value="0.17617753623188406" />
-        <entry key="..\:/TADS/DS151/AndroidStudioProjects/Mutante/app/src/main/res/layout/activity_main.xml" value="0.2033514492753623" />
+        <entry key="..\:/TADS/DS151/AndroidStudioProjects/Mutante/app/src/main/res/layout/activity_login.xml" value="0.6" />
+        <entry key="..\:/TADS/DS151/AndroidStudioProjects/Mutante/app/src/main/res/layout/activity_main.xml" value="0.6" />
         <entry key="..\:/TADS/DS151/AndroidStudioProjects/Mutante/app/src/main/res/layout/activity_novo.xml" value="0.61" />
         <entry key="..\:/TADS/DS151/AndroidStudioProjects/Mutante/app/src/main/res/layout/activity_pesquisar.xml" value="0.61" />
-        <entry key="..\:/TADS/DS151/AndroidStudioProjects/Mutante/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
-        <entry key="..\:/TADS/DS151/AndroidStudioProjects/Mutante/app/src/main/res/layout/mutante_cell.xml" value="0.17798913043478262" />
+        <entry key="..\:/TADS/DS151/AndroidStudioProjects/Mutante/app/src/main/res/layout/activity_splash.xml" value="0.6" />
+        <entry key="..\:/TADS/DS151/AndroidStudioProjects/Mutante/app/src/main/res/layout/mutante_cell.xml" value="0.72" />
         <entry key="..\:/TADS/DS151/AndroidStudioProjects/Mutante/app/src/main/res/menu/menu_edicao.xml" value="0.6" />
         <entry key="..\:/TADS/DS151/AndroidStudioProjects/Mutante/app/src/main/res/menu/menu_main.xml" value="0.25416666666666665" />
         <entry key="..\:/TADS/DS151/AndroidStudioProjects/Mutante/app/src/main/res/menu/menu_pesquisar.xml" value="0.536" />

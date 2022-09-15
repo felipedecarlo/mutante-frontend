@@ -10,7 +10,7 @@ import br.ufpr.ds151.mutante.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIMEOUT = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, SPLASH_TIME_OUT);
+        }, SPLASH_TIMEOUT);
     }
 
 }
